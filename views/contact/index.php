@@ -1,7 +1,12 @@
 <?php include('../views/header.php'); ?>
 <main>
+    <?php if (isset($_GET['success']) && $_GET['success'] == 'true'): ?>
+        <div class="success-message">
+            <p style="text-align: center; color: green; font-size: larger;">Your message has been sent successfully!</p>
+        </div>
+    <?php endif; ?>
     <h1>Contact Us</h1>
-    <form action="/submit_contact" method="post">
+    <form action="submit_contact" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         <label for="email">Email:</label>

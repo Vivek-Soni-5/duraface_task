@@ -36,9 +36,11 @@ switch ($lastSegment) {
         include('../views/product/index.php');
         break;
     case 'details':
-        $productController = new ProductController();
-        $products = $productController->getProduct($params);
-        include('../views/product/details.php');
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $productController = new ProductController();
+            $products = $productController->getProduct($_GET['id']);
+            include('../views/product/details.php');
+        }
         break;
     case 'delete':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -72,7 +74,7 @@ switch ($lastSegment) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $contactController = new ContactController();
             $contactController->submitMessage($_POST['name'], $_POST['email'], $_POST['message']);
-            header('Location: /contact?success');
+            header('Location: contact?success=true');
         }
         break;
     default:
